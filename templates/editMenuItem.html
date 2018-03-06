@@ -1,0 +1,35 @@
+<html>
+<body>
+
+<h1>Edit Menu Item in {{restaurant.name}} menu</h1>
+
+<form action="/restaurant/{{restaurant.id}}/menu/{{menuItem.id}}/edit" method='post'>
+    Name:<br>
+    <input type='text' size='30' name='name' value='{{menuItem.name}}'><br>
+    Description:<br>
+    <input type='text' size='90' name='description' value='{{menuItem.description}}'><br>
+    Price:<br>
+    <input type='text' size='15' name='price' value='{{menuItem.price}}'><br>
+    <br>
+    Course:<br>
+
+    <input type='radio' size='30' name='course' value='Entree'
+           {% if menuItem.course == 'Entree' %} checked='checked' {% endif %} >Entree<br>
+
+    <input type='radio' size='30' name='course' value='Appetizer'
+           {% if menuItem.course == 'Appetizer' %} checked='checked' {% endif %} >Appetizer<br>
+
+    <input type='radio' size='30' name='course' value='Dessert'
+           {% if menuItem.course == 'Dessert' %} checked='checked' {% endif %} >Dessert<br>
+
+    <input type='radio' size='30' name='course' value='Beverage'
+           {% if menuItem.course == 'Beverage' %} checked='checked' {% endif %} >Beverage<br>
+
+    <input type='radio' size='30' name='course' value='Other'
+           {% if menuItem.course == 'Other' %} checked='checked' {% endif %} >Other<br>
+    <br>
+    <input type='submit' value='Save'>
+</form>
+<a href="/restaurant/{{restaurant.id}}/menu">Cancel</a>
+</body>
+</html>
