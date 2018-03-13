@@ -41,7 +41,7 @@ def restaurantsList():
 
     restaurants = session.query(Restaurant)
 
-    return render_template('restaurants.html', restaurants = restaurants)
+    return render_template('restaurants.html', restaurants=restaurants, title='Restaurants')
 
 
 # Page 2: Create route for "New Restaurant Page" function here
@@ -58,11 +58,11 @@ def newRestaurant():
         return redirect(url_for('restaurantsList'))
 
     if request.method == 'GET':
-        return render_template('newRestaurant.html')
+        return render_template('newRestaurant.html', title='New Restaurant')
 
 
 # Page 3: Create route for "Edit Restaurant Page" function here
-@app.route('/restaurant/<int:restaurant_id>/edit', methods = ['GET', 'POST'])
+@app.route('/restaurant/<int:restaurant_id>/edit', methods=['GET', 'POST'])
 def editRestaurant(restaurant_id):
     editedRestaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
     if request.method == 'POST':
@@ -76,7 +76,9 @@ def editRestaurant(restaurant_id):
             return redirect(url_for('restaurantsList'))
 
     if request.method == 'GET':
-        return render_template('editRestaurant.html', restaurant_id=restaurant_id, restaurant_name=editedRestaurant.name)
+        return render_template('editRestaurant.html', restaurant_id = restaurant_id,
+                                                      restaurant_name = editedRestaurant.name,
+                                                      title = 'Edit Restaurant')
 
 
 # Page 4: Create route for "Delete Restaurant Page" function here
@@ -93,8 +95,9 @@ def deleteRestaurant(restaurant_id):
 
     if request.method == 'GET':
         deletedRestaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
-        return render_template('deleteRestaurant.html', restaurant=restaurant_id, restaurant_name=deletedRestaurant.name)
-
+        return render_template('deleteRestaurant.html', restaurant=restaurant_id,
+                                                        restaurant_name=deletedRestaurant.name,
+                                                        title='Delete Restaurant')
     return
 
 # Page 5: Create route for "Restaurant Menu Page" function here
@@ -106,12 +109,14 @@ def showMenu(restaurant_id):
     restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
 
     if request.method == 'GET':
-        return render_template('menu.html', restaurant_id=restaurant.id, restaurant_name = restaurant.name,
-                               items = menuItems)
+        return render_template('menu.html', restaurant_id=restaurant.id,
+                                            restaurant_name=restaurant.name,
+                                            items=menuItems,
+                                            title="{}'s Menu".format(restaurant.name))
 
 
 # Page 6: Create route for "Add a Menu Item Page" function here
-@app.route('/restaurant/<int:restaurant_id>/menu/new', methods = ['GET', 'POST'])
+@app.route('/restaurant/<int:restaurant_id>/menu/new', methods=['GET', 'POST'])
 def addMenuItem(restaurant_id):
 
     if request.method == 'POST':
@@ -129,17 +134,15 @@ def addMenuItem(restaurant_id):
         return redirect(url_for('showMenu', restaurant_id=restaurant_id))
 
     if request.method == 'GET':
-        return render_template('newmenuitem.html', restaurant_id=restaurant_id)
+        return render_template('newmenuitem.html', restaurant_id=restaurant_id, title='New Menu Item')
 
 
 # Page 7: Create route for "Edit a Menu Item Page" function here
-@app.route('/restaurant/<int:restaurant_id>/menu/<int:menuItem_id>/edit', methods = ['GET', 'POST'])
+@app.route('/restaurant/<int:restaurant_id>/menu/<int:menuItem_id>/edit', methods=['GET', 'POST'])
 def editMenuItem(restaurant_id, menuItem_id):
 
     restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
     menuItem = session.query(MenuItem).filter_by(id=menuItem_id).one()
-
-    print(menuItem)
 
     if request.method == 'POST':
         if request.form['name']:
@@ -162,7 +165,7 @@ def editMenuItem(restaurant_id, menuItem_id):
         return redirect(url_for('showMenu', restaurant_id=restaurant.id))
 
     if request.method == 'GET':
-        return render_template('editmenuitem.html', restaurant=restaurant, menuItem=menuItem)
+        return render_template('editmenuitem.html', restaurant=restaurant, menuItem=menuItem, title='Edit Menu Item')
 
 
 # Page 8: Create route for "Delete a Menu Item Page" function here
@@ -180,7 +183,9 @@ def deleteMenuItem(restaurant_id, menuItem_id):
         return redirect(url_for('showMenu', restaurant_id=restaurant_id))
 
     if request.method == 'GET':
-        return render_template('deletemenuitem.html', restaurant=restaurant_id, item=deletedMenuItem)
+        return render_template('deletemenuitem.html', restaurant=restaurant_id,
+                                                      item=deletedMenuItem,
+                                                      title='Delete Menu Item')
 
 
 if __name__ == '__main__':

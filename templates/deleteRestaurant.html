@@ -1,16 +1,10 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-    <title>Delete restaurant</title>
-</head>
-<body>
-    <h1> Are you sure you want to delete {{restaurant_name}} ?</h1>
+{% extends "base.html" %}
+{% block content %}
+    <h3> Are you sure you want to delete {{restaurant_name}} ?</h3>
 
     <form action="#" method = 'post'>
         <input type='submit', value = 'Delete'>
     </form>
     <a href="/restaurants/"> Cancel </a>
 
-</body>
-</html>
+{% endblock %}

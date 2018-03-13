@@ -1,31 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <title>Restaurants</title>
-    <link rel="stylesheet" href="..\static\styles.css" type="text/css">
-</head>
-
-<body>
-    <div id = "wrapper">
-        <header>
-            <a href="/"><img src="..\static\logo.png" alt="logo"></a>
-        </header>
-
-        <nav>
-            <ul class="top-menu">
-                <li class="active">HOME</li>
-                <li><a href="#">ABOUT US</a></li>
-		        <li><a href="#">CONTACT</a></li>
-	        </ul>
-        </nav>
-
-         <div id="heading">
-	        <h1>Restaurants</h1>
-        </div>
-
-        <aside></aside>
-		<section>
+{% extends "base.html" %}
+{% block content %}
 
         <a href="/restaurant/new">Add new restaurant</a>
 
@@ -60,9 +34,4 @@
 	        </div>
             </br>
         {% endfor %}
-
-        </section>
-    </div>
-    <footer></footer>
-</body>
-</html>
+{% endblock %}
