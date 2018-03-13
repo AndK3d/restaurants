@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    {% if title %}
+        <title>{{title}}</title>
+    {% else %}
+        <title>Restaurants</title>
+    {% endif %}
+    <link rel="stylesheet" href="\static\styles.css" type="text/css">
+</head>
+
+<body>
+    <div id = "wrapper">
+        <header>
+            <a href="/"><img src="\static\logo.png" alt="logo"></a>
+        </header>
+
+        <nav>
+            <ul class="top-menu">
+                <li class="active">HOME</li>
+                <li><a href="#">ABOUT US</a></li>
+		        <li><a href="#">CONTACT</a></li>
+	        </ul>
+        </nav>
+
+         <div id="heading">
+	        <h1>
+            {% if title %}
+                {{title}}
+            {% else %}
+                Restaurants
+            {% endif %}
+            </h1>
+        </div>
+
+        <aside></aside>
+		<section>
+            {% block content %}{% endblock %}
+        </section>
+    </div>
+    <footer></footer>
+</body>
+</html>
